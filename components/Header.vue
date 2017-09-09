@@ -4,7 +4,7 @@
             <img src="/logo.svg"/><h1 class="title">/{{title}}</h1>
         </div>
         <div class="menu">
-            <a href="http://localhost:8000">채팅방 나가기</a>
+            <a href="/">채팅방 나가기</a>
         </div>
     </div>
 </template>

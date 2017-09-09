@@ -46,7 +46,7 @@ data() {
     },
   methods: {
     joinRoom () {
-      location.href = "http://localhost:8000/room?id="+this.link
+      location.href = process.env.baseUrl + "/room?id="+this.link
     },
     makeRoom () {
       this.seen = !this.seen

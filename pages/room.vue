@@ -89,7 +89,7 @@ export default {
     joinChat: function() {
       this.isLoding = true
       this.roomId = this.$route.query.id
-      axios.post('http://52.79.159.96:3000/bang/join', {
+      axios.post(process.env.baseUrl+':3000/bang/join', {
         roomId: Number(this.$route.query.id),
         nickname: this.nickname
       }).then(response => {

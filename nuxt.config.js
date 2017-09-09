@@ -26,6 +26,10 @@ module.exports = {
   /*
   ** Add axios globally
   */
+  env: {
+    baseUrl: 'http://9xd-team-h.walkinpcm.com'
+    // baseUrl: 'http://localhost'
+  },
   build: {
     vendor: ['axios','socket.io-client','vue-youtube-embed'],
     /*
