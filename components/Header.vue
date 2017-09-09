@@ -30,11 +30,15 @@ async created () {
 
 <style scoped>
 .header {
-    width: 80%;
+    width: 90%;
     height: 70px;
     margin-left: auto;
     margin-right: auto;
     border-bottom: #555
+}
+
+.header .logo {
+    width: 400px;
 }
 
 .title{

@@ -350,6 +350,11 @@ export default {
   width: 100%;
   height: 90%;
   overflow-y: scroll;
+  text-align: left;
+}
+
+.msg-list-itme ul li {
+  text-align: left;
 }
 
 .input-panel {
