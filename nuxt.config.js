@@ -27,10 +27,15 @@ module.exports = {
   ** Add axios globally
   */
   env: {
+<<<<<<< HEAD
     // baseUrl: 'http://9xd-team-h.walkinpcm.com',
     // serverUrl: 'http://9xd-team-h.walkinpcm.com'
     baseUrl: 'http://localhost:8000',
     serverUrl: 'http://52.79.159.96:3000'
+=======
+    // baseUrl: 'http://9xd-team-h.walkinpcm.com'
+    baseUrl: 'http://localhost'
+>>>>>>> 8097647503e5cd3ba3a74563b53c3566960b37a5
   },
   plugins: [
     { src: '~/plugins/youtube.js', ssr: false }

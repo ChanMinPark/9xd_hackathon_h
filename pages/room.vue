@@ -9,7 +9,7 @@
           <div id="logo">
             <img src="/logoModal.svg" />
           </div>
-          <div class="box-title title is-2">여기에 방제목이 들어갑니다</div>
+          <div class="box-title title is-2">방제 / {{ roomTitle }}</div>
           <div class="input-container"><input class="input custom-input" placeholder="Enter Nickname" type="text" v-model="nickname"></div>
         </div>
         <button class="button" v-bind:class="{ 'is-loading' : isLoding }" v-bind:disabled="button_flag" v-on:click="joinChat">접속</button>
@@ -81,6 +81,14 @@ export default {
         ...message
       })
     })
+
+    axios.get(/*process.env.baseUrl+*/'http://52.79.159.96:3000/bang/'+this.$route.query.id, {
+      }).then(response => {
+        console.log(response)
+        this.roomTitle = response.data.roomName
+      }).catch(e => {
+        this.errors.push(e)
+      })
   },
   methods: {
     closeModal: function() {
@@ -148,6 +156,7 @@ export default {
             src: ''
           }],
         }
+      roomTitle: ''
     }
   },
   created: function() {
@@ -285,7 +294,7 @@ export default {
   float: left;
   width: 30%;
   height: 100%;
-
+  padding-left: 10px;
   /* background-color: #d6ce97; */
 }
 
@@ -330,17 +339,20 @@ export default {
 
 .share-link button {
   width: 100%;
-  height: 100%;
+  height: 45px;
   color: white;
   background-color: #e67d7d;
   border: none;
   border-radius: 25px;
-  font-size: 16px;
+  font-size: 18px;
+  box-shadow: 0 0 11px rgba(230, 125, 125, 1);
+  line-height: 42px;
+  font-weight: 700;
 }
 
 .msg-list {
-  margin-top: 5px;
-  height: 65%;
+  margin-top: 20px;
+  height: 300px;
 }
 
 .msg-list-title {
@@ -363,10 +375,15 @@ export default {
   text-align: left;
 }
 
+.message {
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
 .input-panel {
   display: table;
-  margin-top: 10px;
-  height: 10%;
+  margin-top: 0;
+  height: 40px;
   background-color: #f8f8f8;
 }
 
@@ -374,13 +391,13 @@ export default {
   display: table-cell;
   vertical-align: middle;
   float: left;
-  padding-top: 12px;
-  margin-left: 20px;
+  padding-top: 9px;
+  margin-left: 13px;
 }
 
 .input-panel input {
-  width: 75%;
-  height: calc(100% - 10px);
+  width: calc(100% - 62px);
+  height: 30px;
   margin: 5px 10px;
   display: table-cell;
   vertical-align: middle;

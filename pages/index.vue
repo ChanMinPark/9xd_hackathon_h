@@ -15,9 +15,9 @@ import axios from '~/plugins/axios'
 import JoinRoomModal from '~/components/JoinRoomModal.vue'
 //There is no 'use strict'
 
-//get 50 videos by searchQuery
+//get 30 videos by searchQuery
 var searchQuery = '온스테이지';
-var youtubeRequestUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + searchQuery + '&maxResults=50&key=';
+var youtubeRequestUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + searchQuery + '&maxResults=30&key=';
 var apiKey = 'AIzaSyBPZUrXXkG4Hl2kaD5kyCreNhVduDdiCDQ';
 var videos = [];
 var videoThumbnails = [];
