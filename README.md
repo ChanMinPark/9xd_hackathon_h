@@ -1,6 +1,7 @@
-# wetube
+# Gam-Gi Project
 
-> Nuxt.js project
+> 1st 9XD Hackathon team H.  
+You can watch Youtube videos with your friends while chatting together. :)  
 
 ## Build Setup
 
@@ -20,3 +21,6 @@ For detailed explanation on how things work, checkout the [Nuxt.js docs](https:/
 ## Backpack
 
 We use [backpack](https://github.com/palmerhq/backpack) to watch and build the application, so you can use the latest ES6 features (module syntax, async/await, etc.).
+
+## Back-end Project
+https://github.com/JHPrk/gamgi  
