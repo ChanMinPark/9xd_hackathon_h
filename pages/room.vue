@@ -82,7 +82,12 @@ export default {
       })
     })
 
-    axios.get(/*process.env.baseUrl+*/'http://52.79.159.96:3000/bang/'+this.$route.query.id, {
+    socket.on('sync time', (time) => {
+      console.log("Agagag",time)
+      this.player.seekTo(time)
+    })
+
+    axios.get(process.env.serverUrl+'/bang/'+this.$route.query.id, {
       }).then(response => {
         console.log(response)
         this.room = response.data;
@@ -148,15 +153,24 @@ export default {
     },
     pause () {
       console.log("pause")
-      this.player.pauseVideo()
+      if(this.nickname == this.room.bangjang){
+        socket.emit("sync time",parseInt(this.player.getCurrentTime()))
+        this.player.playVideo()
+      }else{
+        axios.get(process.env.serverUrl+'/bang/'+this.$route.query.id, {
+          }).then(response => {
+            console.log(response)
+            this.player.seekTo(response.data.t)
+            this.player.playVideo()
+          }).catch(e => {
+            this.errors.push(e)
+          })
+      }
     },
     buffering (){
       console.log("buffering")
-      console.log(this.player.getCurrentTime())
+      console.log(this.player)
       console.log(this.room.bangjang)
-      if(this.nickname == this.room.bangjang){
-        console.log("bangjang")
-      }
     },
     qued () {
       console.log("qued")
