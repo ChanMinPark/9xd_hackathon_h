@@ -27,7 +27,7 @@ module.exports = {
   ** Add axios globally
   */
   build: {
-    vendor: ['axios','socket.io-client'],
+    vendor: ['axios','socket.io-client','vue-youtube-embed'],
     /*
     ** Run ESLINT on save
     */

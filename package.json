@@ -21,7 +21,8 @@
     "socket.io": "^2.0.3",
     "socket.io-client": "^2.0.3",
     "source-map-support": "^0.4.15",
-    "vue-socket.io": "^2.1.1-a"
+    "vue-socket.io": "^2.1.1-a",
+    "vue-youtube-embed": "^2.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

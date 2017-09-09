@@ -1,62 +1,62 @@
 <template>
-  <div>
-    <div class="modal" v-bind:class="{ 'is-active' : modal_flag }">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-        <!-- Any other Bulma elements you want -->
-        <div class="box">
-          <div class="content center">
-            <div id="logo">
-              <img src="/logoModal.svg"/>
-            </div>
-            <div class="box-title title is-2">여기에 방제목이 들어갑니다</div>
-            <div class="input-container"><input class="input custom-input" placeholder="Enter Nickname" type="text" v-model="nickname"></div>
+<div>
+  <div class="modal" v-bind:class="{ 'is-active' : modal_flag }">
+    <div class="modal-background"></div>
+    <div class="modal-content">
+      <!-- Any other Bulma elements you want -->
+      <div class="box">
+        <div class="content center">
+          <div id="logo">
+            <img src="/logoModal.svg" />
           </div>
-          <button class="button" v-bind:class="{ 'is-loading' : isLoding }" v-bind:disabled="button_flag" v-on:click="joinChat">접속</button>
+          <div class="box-title title is-2">여기에 방제목이 들어갑니다</div>
+          <div class="input-container"><input class="input custom-input" placeholder="Enter Nickname" type="text" v-model="nickname"></div>
         </div>
+        <button class="button" v-bind:class="{ 'is-loading' : isLoding }" v-bind:disabled="button_flag" v-on:click="joinChat">접속</button>
       </div>
-      <!-- <button class="modal-close is-large" aria-label="close" v-on:click="closeModal"></button> -->
     </div>
-    <div class="container">
-      <div class="room-top">
-        <div class="room-left">
-          <div class="video-panel">
-            <iframe id="youtube-player" width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <!-- <div class="control-panel">
+    <!-- <button class="modal-close is-large" aria-label="close" v-on:click="closeModal"></button> -->
+  </div>
+  <div class="container">
+    <div class="room-top">
+      <div class="room-left">
+        <div class="video-panel">
+          <iframe id="youtube-player" width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe>
+        </div>
+        <!-- <div class="control-panel">
             <button>버튼1</button>
             <button>버튼2</button>
             <button>버튼3</button>
             <button>버튼4</button>
           </div> -->
-        </div>
-
-        <div class="room-right">
-          <div class="share-link">
-            <button>링크 공유</button>
-          </div>
-          <div class="msg-list">
-            <div class="msg-list-title">
-              실시간 채팅
-            </div>
-            <div class="msg-list-items" ref="messages">
-              <ul class="messages" >
-                         <li class="message" v-for="message in messages"><i :title="message.date">{{ message.nickname }}</i>: {{ message.text }}</li>
-                       </ul>
-            </div>
-          </div>
-          <div class="input-panel">
-            <img src="speech-bubble.svg" width="25px" height="25px" alt="글">
-            <input class="inputMessage" type="text" v-model="message" @keyup.enter="sendMessage">
-            <!-- <button>입력</button> -->
-          </div>
-        </div>
       </div>
-      <div class="room-bottom">
 
+      <div class="room-right">
+        <div class="share-link">
+          <button>링크 공유</button>
+        </div>
+        <div class="msg-list">
+          <div class="msg-list-title">
+            실시간 채팅
+          </div>
+          <div class="msg-list-items" ref="messages">
+            <ul class="messages">
+              <li class="message" v-for="message in messages"><i :title="message.date">{{ message.nickname }}</i>: {{ message.text }}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="input-panel">
+          <img src="speech-bubble.svg" width="25px" height="25px" alt="글">
+          <input class="inputMessage" type="text" v-model="message" @ready="onPlayerReady" @keyup.enter="sendMessage">
+          <!-- <button>입력</button> -->
+        </div>
       </div>
     </div>
+    <div class="room-bottom">
+
+    </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -64,7 +64,6 @@
 import axios from '~/plugins/axios'
 
 import socket from '~/plugins/socketio';
-
 var player;
 
 export default {
@@ -74,10 +73,13 @@ export default {
       title: 'Wetube Chat'
     }
   },
-  beforeMount () {
+  beforeMount() {
     socket.on('chat message', (message, nickname) => {
       console.log("message")
-      this.messages.push({nickname,...message})
+      this.messages.push({
+        nickname,
+        ...message
+      })
     })
   },
   methods: {
@@ -93,40 +95,43 @@ export default {
       }).then(response => {
         console.log(response)
         // this.url = `https://www.youtube.com/embed/${response.data.v}?start=${response.data.t}`
-        this.url = `https://www.youtube.com/embed/${response.data.v}?autoplay=1&start=${Number(response.data.t)}`
+        this.url = `https://www.youtube.com/embed/${response.data.v}?enablejsapi=1&start=${Number(response.data.t)}`
         console.log(this.url)
         this.modal_flag = false
-          socket.emit('join', this.$route.query.id, this.nickname)
+        socket.emit('join', this.$route.query.id, this.nickname)
       }).catch(e => {
         this.errors.push(e)
       })
     },
         onYouTubeIframeAPIReady() {
-      console.log("youtue")
-                  player = new YT.Player('youtube-player', {
-                        events: {
-                              'onReady': self.onPlayerReady,               // 플레이어 로드가 완료되고 API 호출을 받을 준비가 될 때마다 실행
-                        }
-                  });
-            },
-       onPlayerReady(event) {
-                  console.log('onPlayerReady 실행');
+      console.log("youtue")            
+      player = new YouTube.Player('youtube-player', {                
+        events: {                    
+          onReady: 'onPlayerReady',
+                         // 플레이어 로드가 완료되고 API 호출을 받을 준비가 될 때마다 실행
+                          
+        }            
+      });        
+    },
+       onPlayerReady(event) {            
+      console.log('onPlayerReady 실행');
 
-                  // 플레이어 자동실행 (주의: 모바일에서는 자동실행되지 않음)
-                  event.target.playVideo();
-            },
+                   // 플레이어 자동실행 (주의: 모바일에서는 자동실행되지 않음)
+                  
+      event.target.playVideo();        
+    },
 
-      sendMessage () {
-        if (!this.message.trim()) return
-        let message = {
-          date: new Date().toJSON(),
-          text: this.message.trim()
-        }
-        this.message = ''
-        socket.emit('chat message', message)
-      },
-      scrollToBottom () {
-        console.log('scrilltoottom')
+    sendMessage() {
+      if (!this.message.trim()) return
+      let message = {
+        date: new Date().toJSON(),
+        text: this.message.trim()
+      }
+      this.message = ''
+      socket.emit('chat message', message)
+    },
+    scrollToBottom() {
+      console.log('scrilltoottom')
       this.$nextTick(() => {
         this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
       })
@@ -140,8 +145,8 @@ export default {
       nickname: '',
       url: '',
       roomId: '',
-      messages:[],
-      message:''
+      messages: [],
+      message: ''
     }
   },
   created: function() {
