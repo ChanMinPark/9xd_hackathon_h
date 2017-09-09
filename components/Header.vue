@@ -1,10 +1,10 @@
 <template>
     <div class="header">
         <div class="logo">
-            <img src="/logo.svg"/><h1 class="title">{{title}}</h1>
+            <img src="/logo.svg"/><h1 class="title">/{{title}}</h1>
         </div>
         <div class="menu">
-            채팅방 나가기
+            <a href="http://localhost:8000">채팅방 나가기</a>
         </div>
     </div>
 </template>
@@ -33,6 +33,14 @@ async created () {
     height: 70px;
     margin-left: auto;
     margin-right: auto;
+}
+
+.title{
+  padding:12px;
+}
+
+.menu {
+  padding:24px;
 }
 
 .logo,
