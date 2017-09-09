@@ -12,6 +12,7 @@
 <script>
 /*eslint-disable*/
 import axios from '~/plugins/axios'
+
 export default {
   data() {
 

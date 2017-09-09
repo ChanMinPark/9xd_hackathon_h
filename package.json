@@ -16,8 +16,12 @@
     "bulma": "^0.5.1",
     "cross-env": "^5.0.1",
     "express": "^4.15.3",
+    "fs": "0.0.1-security",
     "nuxt": "^1.0.0-rc3",
-    "source-map-support": "^0.4.15"
+    "socket.io": "^2.0.3",
+    "socket.io-client": "^2.0.3",
+    "source-map-support": "^0.4.15",
+    "vue-socket.io": "^2.1.1-a"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

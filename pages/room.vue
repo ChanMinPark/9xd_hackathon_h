@@ -39,12 +39,14 @@
               실시간 채팅
             </div>
             <div class="msg-list-items">
-
+              <ul class="messages" ref="messages">
+                         <li class="message" v-for="message in messages"><i :title="message.date">{{ message.date.split('T')[1].slice(0, -2) }}</i>: {{ message.text }}</li>
+                       </ul>
             </div>
           </div>
           <div class="input-panel">
             <img src="speech-bubble.svg" width="25px" height="25px" alt="글">
-            <input class="input" type="text">
+            <input class="inputMessage" type="text" v-model="message" @keyup.enter="sendMessage">
             <!-- <button>입력</button> -->
           </div>
         </div>
@@ -60,6 +62,8 @@
 /*eslint-disable*/
 import axios from '~/plugins/axios'
 
+import socket from '~/plugins/socketio';
+
 var player;
 
 export default {
@@ -68,6 +72,11 @@ export default {
     return {
       title: 'Wetube Chat'
     }
+  },
+  beforeMount () {
+    socket.on('chat message', (message, nickname) => {
+      this.messages.push(message)
+    })
   },
   methods: {
     closeModal: function() {
@@ -85,6 +94,7 @@ export default {
         this.url = `https://www.youtube.com/embed/${response.data.v}?autoplay=1&start=${Number(response.data.t)}`
         console.log(this.url)
         this.modal_flag = false
+          socket.emit('join', this.$route.query.id, this.nickname)
       }).catch(e => {
         this.errors.push(e)
       })
@@ -102,7 +112,18 @@ export default {
 
                   // 플레이어 자동실행 (주의: 모바일에서는 자동실행되지 않음)
                   event.target.playVideo();
-            }
+            },
+
+      sendMessage () {
+        if (!this.message.trim()) return
+        let message = {
+          date: new Date().toJSON(),
+          text: this.message.trim()
+        }
+        this.messages.push(message)
+        this.message = ''
+        socket.emit('chat-message', message)
+      }
   },
   data() {
     return {
@@ -111,7 +132,9 @@ export default {
       isLoding: false,
       nickname: '',
       url: '',
-      roomId: ''
+      roomId: '',
+      messages:[],
+      message:''
     }
   },
   created: function() {
