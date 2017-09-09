@@ -70,6 +70,7 @@ data() {
   height: 340px;
   border-radius: 10px;
   padding: 0;
+  box-shadow: 0 0 24px rgba(72, 72, 72, 0.5);
 }
 
 #logo {
