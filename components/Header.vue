@@ -1,8 +1,11 @@
 <template>
     <div class="header">
-        <div class="logo">
-            <img src="/logo.svg"/><h1 class="title">/{{title}}</h1>
+        <div class="head-logo">
+            <img src="/logo.svg"/><h3 class="title">방제 / {{ title }}</h3>
         </div>
+        <!-- <div class="head-title title is-3">
+            방제 / {{title}}
+        </div> -->
         <div class="menu">
             <a href="/">채팅방 나가기</a>
         </div>
@@ -29,38 +32,43 @@ async created () {
 </script>
 
 <style scoped>
-.header {
-    width: 90%;
-    height: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    border-bottom: #555
-}
+    .header {
+        width: 100%;
+        height: 70px;
+        margin-left: auto;
+        margin-right: auto;
+        border-bottom: #555;
+        box-shadow: 0 2px 4px rgba(188, 188, 188, 0.5);
+        padding: 0 45px;
+    }
 
-.header .logo {
-    width: 400px;
-}
+    .title{
+        padding:12px;
+        width: 650px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 45px;
+        font-size: 30px;
+        font-weight: 700;
+        color: #404040;
+    }
 
-.title{
-  padding:12px;
-}
+    .head-logo,
+    .menu {
+        display: flex;
+        height: 100%;
+        vertical-align: middle;
+    }
 
-.menu {
-  padding:24px;
-}
+    .menu a {
+        line-height: 70px;
+        color: #808080;
+        font-size: 20px;
+        font-weight: 700;
+        margin-left: auto;
+    }
 
-.logo,
-.menu {
-    display: flex;
-    height: 100%;
-    vertical-align: middle;
-}
-
-.logo {
-    float: left;
-}
-
-.menu {
-    float: right;
-}
+    .head-logo {
+        float: left;
+    }
 </style>
