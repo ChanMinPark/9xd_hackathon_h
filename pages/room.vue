@@ -82,7 +82,7 @@ export default {
       }).then(response => {
         console.log(response)
         // this.url = `https://www.youtube.com/embed/${response.data.v}?start=${response.data.t}`
-        this.url = `https://www.youtube.com/embed/${response.data.v}?autoplay=1&start=1`
+        this.url = `https://www.youtube.com/embed/${response.data.v}?autoplay=1&start=${Number(response.data.t)}`
         console.log(this.url)
         this.modal_flag = false
       }).catch(e => {
