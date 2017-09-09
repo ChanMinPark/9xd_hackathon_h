@@ -2,7 +2,7 @@
     <div class="container">
         <div class="room-left">
             <div class="video-panel">
-
+              <iframe width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe>
             </div>
             <div class="control-panel">
                 <button>버튼1</button>
@@ -34,7 +34,11 @@ export default {
     }
   },
   methods: {
-
+  },
+  data () {
+    return {
+      url: 'https://www.youtube.com/embed/Dza-lHdf6GU'
+    }
   }
 }
 </script>
