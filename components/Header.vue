@@ -1,11 +1,11 @@
 <template>
     <div class="header">
         <div class="head-logo">
-            <img src="/logo.svg"/>
+            <img src="/logo.svg"/><h3 class="title">방제 / {{ title }}</h3>
         </div>
-        <div class="head-title title is-3">
+        <!-- <div class="head-title title is-3">
             방제 / {{title}}
-        </div>
+        </div> -->
         <div class="menu">
             <a href="http://localhost:8000">채팅방 나가기</a>
         </div>
@@ -32,56 +32,43 @@ async created () {
 </script>
 
 <style scoped>
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+    .header {
+        width: 100%;
+        height: 70px;
+        margin-left: auto;
+        margin-right: auto;
+        border-bottom: #555;
+        box-shadow: 0 2px 4px rgba(188, 188, 188, 0.5);
+        padding: 0 45px;
+    }
 
-* {
-    font-family: 'Noto Sans KR', sans-serif;
-}
+    .title{
+        padding:12px;
+        width: 650px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        line-height: 45px;
+        font-size: 30px;
+        font-weight: 700;
+        color: #404040;
+    }
 
-.header {
-    width: 100%;
-    height: 70px;
-    padding: 0 7%;
-    box-shadow: 0 0 10px #8f8f8f;
-    /* border-bottom: #555 */
-}
+    .head-logo,
+    .menu {
+        display: flex;
+        height: 100%;
+        vertical-align: middle;
+    }
 
-.header .head-title {
-    width: 60%;
-    text-rendering: optimizeSpeed;
-    font-weight: 500;
-    color: #343434;
-}
+    .menu a {
+        line-height: 70px;
+        color: #808080;
+        font-size: 20px;
+        font-weight: 700;
+        margin-left: auto;
+    }
 
-.title{
-  padding:12px;
-}
-
-.menu {
-  padding:24px;
-  text-rendering: optimizeSpeed;
-}
-
-.head-logo,
-.head-title,
-.menu {
-    display: flex;
-    height: 100%;
-    vertical-align: middle;
-}
-
-.head-logo {
-    float: left;
-    padding-right: 20px;
-}
-
-.head-title {
-    float: left;
-    padding-top: 18px;
-    padding-left: 20px;
-}
-
-.menu {
-    float: right;
-}
+    .head-logo {
+        float: left;
+    }
 </style>

@@ -285,7 +285,7 @@ export default {
 
 .video-panel,
 .control-panel {
-  width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
