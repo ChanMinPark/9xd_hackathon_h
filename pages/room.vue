@@ -9,7 +9,7 @@
           <div id="logo">
             <img src="/logoModal.svg" />
           </div>
-          <div class="box-title title is-2">여기에 방제목이 들어갑니다</div>
+          <div class="box-title title is-2">방제 / {{ roomTitle }}</div>
           <div class="input-container"><input class="input custom-input" placeholder="Enter Nickname" type="text" v-model="nickname"></div>
         </div>
         <button class="button" v-bind:class="{ 'is-loading' : isLoding }" v-bind:disabled="button_flag" v-on:click="joinChat">접속</button>
@@ -81,6 +81,14 @@ export default {
         ...message
       })
     })
+
+    axios.get(/*process.env.baseUrl+*/'http://52.79.159.96:3000/bang/'+this.$route.query.id, {
+      }).then(response => {
+        console.log(response)
+        this.roomTitle = response.data.roomName
+      }).catch(e => {
+        this.errors.push(e)
+      })
   },
   methods: {
     closeModal: function() {
@@ -146,7 +154,8 @@ export default {
       url: '',
       roomId: '',
       messages: [],
-      message: ''
+      message: '',
+      roomTitle: ''
     }
   },
   created: function() {
