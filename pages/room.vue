@@ -58,8 +58,9 @@
         추천 동영상
       </div>
       <div class="bottom-video-list">
-        <div class="video-card">
-
+        <div class="video-card" v-for="vl in videoIdList">
+          <img :src="vl.id" alt="썸네일">
+          <div>{{ vl.title }}</div>
         </div>
       </div>
     </div>
@@ -503,6 +504,18 @@ export default {
   width: 100%;
   height: 35px;
   border-bottom: 1px solid #8f8f8f;
+}
+
+.video-card {
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 17%;
+  float: left;
+}
+
+.video-card img {
+  width: 100%;
+  height: auto;
 }
 
 #youtube-player {
