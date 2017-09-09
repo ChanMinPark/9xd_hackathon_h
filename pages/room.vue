@@ -177,7 +177,7 @@ export default {
   width: 70%;
   height: 100%;
   /* padding: 20px 20px; */
-  background-color: #e5c0c0;
+  /* background-color: #e5c0c0; */
 }
 
 .room-right {
@@ -185,7 +185,7 @@ export default {
   width: 30%;
   height: 100%;
 
-  background-color: #d6ce97;
+  /* background-color: #d6ce97; */
 }
 
 .video-panel,
@@ -195,7 +195,7 @@ export default {
   margin-right: auto;
   margin-top: 20px;
 
-  background-color: #d6ce97;
+  /* background-color: #d6ce97; */
 }
 
 .video-panel {
@@ -219,7 +219,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
 
-  background-color: #e5c0c0;
+  /* background-color: #e5c0c0; */
 }
 
 .share-link {
