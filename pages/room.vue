@@ -40,7 +40,7 @@
             </div>
             <div class="msg-list-items">
               <ul class="messages" ref="messages">
-                         <li class="message" v-for="message in messages"><i :title="message.date">{{ message.date.split('T')[1].slice(0, -2) }}</i>: {{ message.text }}</li>
+                         <li class="message" v-for="message in messages"><i :title="message.date">{{ message.nickname }}</i>: {{ message.text }}</li>
                        </ul>
             </div>
           </div>
@@ -76,7 +76,7 @@ export default {
   beforeMount () {
     socket.on('chat message', (message, nickname) => {
       console.log("message")
-      this.messages.push(message)
+      this.messages.push({nickname,...message})
     })
   },
   methods: {
