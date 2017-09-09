@@ -6,29 +6,23 @@
       <article class="media">
         <div class="media-content">
           <div id="logo">
-          <img src="/logo.svg"/>
-        </div>
-        <br/>
-            <div class="field is-grouped">
-              <div class="field-label is-normal">
-                <label class="label">Link</label>
-              </div>
-              <p class="control is-expanded">
-                <input class="input" type="text" v-model="link" placeholder="Find a repository">
-              </p>
-              <p class="control">
-                <a v-on:click="joinRoom" class="button is-success">
+            <img src="/logoModal.svg"/>
+          </div>
+          <div class="input-container field is-grouped">
+            <p class="control is-expanded">
+              <input class="input custom-input" type="text" v-model="link" placeholder="Enter Room link">
+            </p>
+          </div>
+          <p class="control">
+            <a v-on:click="joinRoom" class="button">
               입장
             </a>
-              </p>
-
-          </div>
+            <a v-on:click="makeRoom" class="button">
+              방만들기
+            </a>
+          </p>
         </div>
-
       </article>
-    </div>
-    <div v-on:click="makeRoom" class="media-footer">
-      방만들기
     </div>
   </div>
     <BuildRoomModal v-if="seen"/>
@@ -66,22 +60,81 @@ data() {
   color: #fff;
 }
 
-.button {
-  padding: 5px;
+.modal-content {
+  width: 700px;
 }
 
-.media-footer {}
+.box {
+  overflow: hidden;
+  width: 700px;
+  height: 340px;
+  border-radius: 10px;
+  padding: 0;
+}
+
+#logo {
+  padding-top: 42px;
+  padding-left: 62px;
+}
+
+#logo img {
+  float: left;
+}
+
+#logo:after {
+  display: block;
+  content: "";
+  clear: both;
+}
+
+.input-container {
+  margin-top: 45px;
+  margin-bottom: 0px !important;
+  padding: 0 60px;
+}
+
+.button {
+  padding: 0;
+  text-align: center;
+  border: transparent;
+  width: 140px;
+  height: 50px;
+  border-radius: 32px;
+  background-color: #E67D7D;
+  line-height: 50px;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 0 11px rgba(230, 125, 125, 1);
+  margin: 26px 0 0 280px;
+}
+
+.button:hover {
+  background-color: #E67D7D;
+}
+
+.media-footer {
+  cursor: pointer;
+  width: 140px !important;
+  height: 40px;
+  margin: 38px 0 0 280px;
+  background-color: #E67D7D;
+  line-height: 40px;
+  border-radius: 20px;
+  font-weight: 700;
+}
+
 .field-label {
   text-align: center;
 }
-  .logo {
 
+.logo {
   width: 151px;
   height: 34px;
   object-fit: contain;
+}
 
-  }
-  #logo{
-    text-align: center;
-  }
+#logo{
+  text-align: center;
+}
 </style>
