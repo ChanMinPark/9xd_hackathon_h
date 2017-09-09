@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <div class="logo">
-            GAMGI
+            <img src="/logo.svg"/><h1 class="title">{{title}}</h1>
         </div>
         <div class="menu">
             채팅방 나가기
@@ -10,7 +10,21 @@
 </template>
 
 <script>
+/*eslint-disable*/
+import axios from '~/plugins/axios'
+export default {
+  data() {
 
+  return {
+    title: ''
+  }
+},
+async created () {
+  let data = await axios.get('http://52.79.159.96:3000/bang/'+this.$route.query.id);
+  console.log(data)
+  this.title = data.data.roomName
+}
+}
 </script>
 
 <style scoped>
@@ -19,14 +33,11 @@
     height: 70px;
     margin-left: auto;
     margin-right: auto;
-    display: table;
-
-    background-color:darkcyan
 }
 
 .logo,
 .menu {
-    display: table-cell;
+    display: flex;
     height: 100%;
     vertical-align: middle;
 }
