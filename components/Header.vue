@@ -43,7 +43,7 @@ async created () {
     }
 
     .title{
-        padding:12px;
+        padding:12px 30px;
         width: 650px;
         white-space: nowrap;
         text-overflow: ellipsis;
