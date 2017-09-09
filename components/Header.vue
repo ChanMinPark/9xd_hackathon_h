@@ -33,6 +33,7 @@ async created () {
     height: 70px;
     margin-left: auto;
     margin-right: auto;
+    border-bottom: #555
 }
 
 .title{
