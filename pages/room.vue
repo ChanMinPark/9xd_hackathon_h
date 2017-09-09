@@ -38,8 +38,8 @@
             <div class="msg-list-title">
               실시간 채팅
             </div>
-            <div class="msg-list-items">
-              <ul class="messages" ref="messages">
+            <div class="msg-list-items" ref="messages">
+              <ul class="messages" >
                          <li class="message" v-for="message in messages"><i :title="message.date">{{ message.nickname }}</i>: {{ message.text }}</li>
                        </ul>
             </div>
@@ -123,7 +123,13 @@ export default {
         }
         this.message = ''
         socket.emit('chat message', message)
-      }
+      },
+      scrollToBottom () {
+        console.log('scrilltoottom')
+      this.$nextTick(() => {
+        this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
+      })
+    }
   },
   data() {
     return {
@@ -147,7 +153,8 @@ export default {
       } else {
         this.button_flag = true
       }
-    }
+    },
+    messages: 'scrollToBottom'
   }
 }
 </script>
@@ -277,6 +284,7 @@ export default {
 .msg-list-items {
   width: 100%;
   height: 90%;
+  overflow-y: scroll;
 }
 
 .input-panel {
