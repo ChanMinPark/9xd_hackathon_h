@@ -155,7 +155,7 @@ export default {
           sources: [{
             src: ''
           }],
-        }
+        },
       roomTitle: ''
     }
   },
