@@ -17,7 +17,7 @@
         <div class="container">
             <div class="room-left">
                 <div class="video-panel">
-                <iframe width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe>
+                <iframe id="youtube-player" width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <div class="control-panel">
                     <button>버튼1</button>
@@ -42,7 +42,10 @@
 </template>
 
 <script>
+/*eslint-disable*/
 import axios from '~/plugins/axios'
+
+var player;
 
 export default {
   layout: 'chatroom',
@@ -64,13 +67,27 @@ export default {
       }).then(response => {
         console.log(response)
         // this.url = `https://www.youtube.com/embed/${response.data.v}?start=${response.data.t}`
-        this.url = `https://www.youtube.com/embed/${response.data.v}?start=120`
+        this.url = `https://www.youtube.com/embed/${response.data.v}?autoplay=1&start=1`
         console.log(this.url)
         this.modal_flag = false
       }).catch(e => {
         this.errors.push(e)
       })
-    }
+    },
+    onYouTubeIframeAPIReady() {
+  console.log("youtue")
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': self.onPlayerReady,               // 플레이어 로드가 완료되고 API 호출을 받을 준비가 될 때마다 실행
+                }
+            });
+        },
+   onPlayerReady(event) {
+            console.log('onPlayerReady 실행');
+ 
+            // 플레이어 자동실행 (주의: 모바일에서는 자동실행되지 않음)
+            event.target.playVideo();
+        }
   },
   data () {
     return {
