@@ -59,7 +59,9 @@
       </div>
       <div class="bottom-video-list">
         <div class="video-card" v-for="vl in videoIdList">
-          <img :src="vl.id" alt="썸네일">
+          <a :href="vl.link" target="_blank">
+            <img :src="vl.id" alt="썸네일">
+          </a>
           <div>{{ vl.title }}</div>
         </div>
       </div>
@@ -151,7 +153,8 @@ export default {
         if(data.items[index].id.kind === 'youtube#video') {
           var tempObj = {
             id : 'https://img.youtube.com/vi/' + (data.items[index].snippet.thumbnails.default.url).split('/')[4] + '/mqdefault.jpg',
-            title : data.items[index].snippet.title
+            title : data.items[index].snippet.title,
+            link : 'https://www.youtube.com/watch?v=' + (data.items[index].snippet.thumbnails.default.url).split('/')[4]
           }
           this.videoIdList.push(tempObj);
         }
