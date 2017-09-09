@@ -9,10 +9,6 @@ module.exports = {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: 'Nuxt.js project' }
     ],
-    script:[
-           {src:'https://cdnjs.com/libraries/bulma'},
-           {src:'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'}
-       ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
@@ -21,6 +17,7 @@ module.exports = {
   ** Global CSS
   */
   css: [
+    'bulma',
     '~/assets/css/main.css'
   ],
   /*
