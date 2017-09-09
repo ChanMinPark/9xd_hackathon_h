@@ -6,15 +6,16 @@
         <!-- Any other Bulma elements you want -->
         <div class="box">
           <div class="content center">
-            <div class="box-title title is-2">닉네임을 입력해주세요 :)</div>
-            <div class="box-input"><input class="input" type="text" v-model="nickname"></div>
-            <div class="box-button">
-              <button class="button is-primary" v-bind:class="{ 'is-loading' : isLoding }" v-bind:disabled="button_flag" v-on:click="joinChat">접속</button>
+            <div id="logo">
+              <img src="/logoModal.svg"/>
             </div>
+            <div class="box-title title is-2">여기에 방제목이 들어갑니다</div>
+            <div class="input-container"><input class="input custom-input" placeholder="Enter Nickname" type="text" v-model="nickname"></div>
           </div>
+          <button class="button" v-bind:class="{ 'is-loading' : isLoding }" v-bind:disabled="button_flag" v-on:click="joinChat">접속</button>
         </div>
       </div>
-      <button class="modal-close is-large" aria-label="close" v-on:click="closeModal"></button>
+      <!-- <button class="modal-close is-large" aria-label="close" v-on:click="closeModal"></button> -->
     </div>
     <div class="container">
       <div class="room-top">
@@ -160,14 +161,78 @@ export default {
 </script>
 
 <style scoped>
+.modal {
+  color: #fff;
+}
+
+.modal-content {
+  width: 700px;
+  box-shadow: 0 0 24px rgba(72, 72, 72, 0.5);
+}
+
+.box {
+  overflow: hidden;
+  width: 700px;
+  height: 340px;
+  border-radius: 10px;
+  padding: 0;
+}
+
+.input-container {
+  margin-top: 20px;
+  margin-bottom: 0px !important;
+}
+
+.button {
+  padding: 0;
+  text-align: center;
+  border: transparent;
+  width: 140px;
+  height: 50px;
+  border-radius: 32px;
+  background-color: #E67D7D;
+  line-height: 50px;
+  color: #FFFFFF;
+  font-size: 20px;
+  font-weight: 700;
+  box-shadow: 0 0 11px rgba(230, 125, 125, 1);
+  margin: 38px 0 0 280px;
+}
+
+.button:hover {
+  background-color: #E67D7D;
+}
+
+#logo {
+  height: 40px;
+}
+
+#logo img {
+  float: left;
+}
+
 .center {
   text-align: center;
+  padding-top: 42px;
+  padding-left: 62px;
+  padding-right: 62px;
+  margin-bottom: 0px;
 }
 
 .box-title,
 .box-input,
 .box-button {
   padding: 10px;
+}
+
+.box-title {
+  font-size: 30px;
+  color: #404040;
+  padding: 0;
+  text-align: left;
+  margin-top: 38px;
+  margin-bottom: 0;
+  font-weight: 700;
 }
 
 .box-button button {
