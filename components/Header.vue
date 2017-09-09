@@ -1,7 +1,10 @@
 <template>
     <div class="header">
-        <div class="logo">
-            <img src="/logo.svg"/><h1 class="title">/{{title}}</h1>
+        <div class="head-logo">
+            <img src="/logo.svg"/>
+        </div>
+        <div class="head-title title is-3">
+            방제 / {{title}}
         </div>
         <div class="menu">
             <a href="http://localhost:8000">채팅방 나가기</a>
@@ -29,16 +32,25 @@ async created () {
 </script>
 
 <style scoped>
-.header {
-    width: 90%;
-    height: 70px;
-    margin-left: auto;
-    margin-right: auto;
-    border-bottom: #555
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+* {
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
-.header .logo {
-    width: 400px;
+.header {
+    width: 100%;
+    height: 70px;
+    padding: 0 7%;
+    box-shadow: 0 0 10px #8f8f8f;
+    /* border-bottom: #555 */
+}
+
+.header .head-title {
+    width: 60%;
+    text-rendering: optimizeSpeed;
+    font-weight: 500;
+    color: #343434;
 }
 
 .title{
@@ -47,17 +59,26 @@ async created () {
 
 .menu {
   padding:24px;
+  text-rendering: optimizeSpeed;
 }
 
-.logo,
+.head-logo,
+.head-title,
 .menu {
     display: flex;
     height: 100%;
     vertical-align: middle;
 }
 
-.logo {
+.head-logo {
     float: left;
+    padding-right: 20px;
+}
+
+.head-title {
+    float: left;
+    padding-top: 18px;
+    padding-left: 20px;
 }
 
 .menu {

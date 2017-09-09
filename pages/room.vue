@@ -41,8 +41,8 @@
             </div>
             <div class="msg-list-items" ref="messages">
               <ul class="messages" >
-                         <li class="message" v-for="message in messages"><i :title="message.date">{{ message.nickname }}</i>: {{ message.text }}</li>
-                       </ul>
+                <li class="message" v-for="message in messages"><i :title="message.date">{{ message.nickname }}</i>: {{ message.text }}</li>
+              </ul>
             </div>
           </div>
           <div class="input-panel">
