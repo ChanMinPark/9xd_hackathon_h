@@ -14,7 +14,7 @@
                 <label class="label">Link</label>
               </div>
               <p class="control is-expanded">
-                <input class="input" type="text" id="input-link" placeholder="Find a repository">
+                <input class="input" type="text" v-model="link" placeholder="Find a repository">
               </p>
               <p class="control">
                 <a v-on:click="joinRoom" class="button is-success">
@@ -43,13 +43,17 @@ import BuildRoomModal from './BuildRoomModal.vue'
 export default {
 data() {
   return {
-    seen: false
+    seen: false,
+    link: ''
   }
 },
     components: {
       BuildRoomModal
     },
   methods: {
+    joinRoom () {
+      location.href = "http://localhost:8000/room?id="+this.link
+    },
     makeRoom () {
       this.seen = !this.seen
     }

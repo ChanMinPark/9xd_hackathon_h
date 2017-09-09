@@ -58,11 +58,12 @@ export default {
   methods: {
     makeRoom() {
       axios.post('http://52.79.159.96:3000/bang/create', {
-        roomName: "this is fun room",
-        v: "tbAQQhoqXNI",
-        nickname: "na zzang"
+        roomName: this.title,
+        v: this.link,
+        nickname: this.nickname
       }).then(res => {
-        location.href = "localhost:8000/room"
+        console.log(res)
+        location.href = "http://localhost:8000/room?id="+res.data.roomId
       })
     }
   }
