@@ -34,7 +34,7 @@
 
       <div class="room-right">
         <div class="share-link">
-          <button>링크 공유</button>
+          <button v-on:click="copyLink">링크 공유</button>
         </div>
         <div class="msg-list">
           <div class="msg-list-title">
@@ -108,6 +108,15 @@ export default {
   methods: {
     closeModal: function() {
       this.modal_flag = false
+    },
+    copyLink: function() {
+      var inp =document.createElement('input')
+      document.body.appendChild(inp)
+      inp.value = window.location.href
+      inp.select()
+      document.execCommand('copy',false)
+      inp.remove()
+      alert('Link copied on your clipboard!')
     },
     joinChat: function() {
       this.isLoding = true
@@ -430,6 +439,10 @@ export default {
 .share-link {
   margin-top: 20px;
   height: 10%
+}
+
+.share-link button {
+  cursor: pointer;
 }
 
 .share-link button {
