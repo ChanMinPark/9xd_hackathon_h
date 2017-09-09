@@ -37,7 +37,7 @@ export default {
   },
   head() {
     return {
-      title: 'Users'
+      title: 'Gam-gi'
     }
   },
   methods: {

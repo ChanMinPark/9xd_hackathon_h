@@ -24,7 +24,7 @@ export default {
   }
 },
 async created () {
-  let data = await axios.get('http://52.79.159.96:3000/bang/'+this.$route.query.id);
+  let data = await axios.get(process.env.serverUrl + '/bang/'+this.$route.query.id);
   console.log(data)
   this.title = data.data.roomName
 }

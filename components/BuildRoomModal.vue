@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     makeRoom() {
-      axios.post(process.env.baseUrl+':3000/bang/create', {
+      axios.post(process.env.serverUrl+'/bang/create', {
         roomName: this.title,
         v: this.link,
         nickname: this.nickname

@@ -21,7 +21,8 @@
     <div class="room-top">
       <div class="room-left">
         <div class="video-panel">
-          <iframe id="youtube-player" width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe>
+          <!-- <iframe id="youtube-player" width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe> -->
+          <youtube :video-id="videoId" :player-vars="playerVars"></youtube>
         </div>
         <!-- <div class="control-panel">
             <button>버튼1</button>
@@ -62,7 +63,6 @@
 <script>
 /*eslint-disable*/
 import axios from '~/plugins/axios'
-
 import socket from '~/plugins/socketio';
 var player;
 
@@ -89,29 +89,22 @@ export default {
     joinChat: function() {
       this.isLoding = true
       this.roomId = this.$route.query.id
-      axios.post(process.env.baseUrl+':3000/bang/join', {
+      axios.post(process.env.serverUrl+'/bang/join', {
         roomId: Number(this.$route.query.id),
         nickname: this.nickname
       }).then(response => {
         console.log(response)
         // this.url = `https://www.youtube.com/embed/${response.data.v}?start=${response.data.t}`
-        this.url = `https://www.youtube.com/embed/${response.data.v}?enablejsapi=1&start=${Number(response.data.t)}`
+        this.url = `https://www.youtube.com/embed/${response.data.v}?autoplay=1&start=${Number(response.data.t)}`
+        // this.url = response.data.v;
+        this.playerVars.time = this.$youtube.getTimeFromURL(this.url)
+        this.videoId = this.$youtube.getIdFromURL(this.url)
         console.log(this.url)
         this.modal_flag = false
         socket.emit('join', this.$route.query.id, this.nickname)
       }).catch(e => {
         this.errors.push(e)
       })
-    },
-        onYouTubeIframeAPIReady() {
-      console.log("youtue")            
-      player = new YouTube.Player('youtube-player', {                
-        events: {                    
-          onReady: 'onPlayerReady',
-                         // 플레이어 로드가 완료되고 API 호출을 받을 준비가 될 때마다 실행
-                          
-        }            
-      });        
     },
        onPlayerReady(event) {            
       console.log('onPlayerReady 실행');
@@ -146,7 +139,15 @@ export default {
       url: '',
       roomId: '',
       messages: [],
-      message: ''
+      message: '',
+      videoId: '',
+      playerVars: { autoplay: 1, time: 1},
+      playerOptions: {
+          // videojs options
+          sources: [{
+            src: ''
+          }],
+        }
     }
   },
   created: function() {
