@@ -47,7 +47,7 @@ export default {
     makeRoom() {
       axios.post(process.env.serverUrl+'/bang/create', {
         roomName: this.title,
-        v: this.link,
+        v: this.link.includes('youtube') ? this.link.split('/')[3].split('=')[1] : this.link,
         nickname: this.nickname
       }).then(res => {
         console.log(res)

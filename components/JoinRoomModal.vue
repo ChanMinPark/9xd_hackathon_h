@@ -46,7 +46,8 @@ data() {
     },
   methods: {
     joinRoom () {
-      location.href = process.env.baseUrl + "/room?id="+this.link
+      var link = this.link.includes('room') ? this.link.split('=')[1] : this.link
+      location.href = process.env.baseUrl + "/room?id=" + link
     },
     makeRoom () {
       this.seen = !this.seen
