@@ -75,6 +75,7 @@ export default {
   },
   beforeMount () {
     socket.on('chat message', (message, nickname) => {
+      console.log("message")
       this.messages.push(message)
     })
   },
@@ -120,9 +121,8 @@ export default {
           date: new Date().toJSON(),
           text: this.message.trim()
         }
-        this.messages.push(message)
         this.message = ''
-        socket.emit('chat-message', message)
+        socket.emit('chat message', message)
       }
   },
   data() {
