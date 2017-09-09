@@ -381,7 +381,7 @@ export default {
 }
 
 .input-panel input {
-  width: 240px;
+  width: calc(100% - 62px);
   height: 30px;
   margin: 5px 10px;
   display: table-cell;
