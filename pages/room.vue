@@ -63,7 +63,9 @@ export default {
         nickname: this.nickname
       }).then(response => {
         console.log(response)
-        this.url = `https://www.youtube.com/embed/${response.data.v}?t=${response.data.t}`
+        // this.url = `https://www.youtube.com/embed/${response.data.v}?start=${response.data.t}`
+        this.url = `https://www.youtube.com/embed/${response.data.v}?start=120`
+        console.log(this.url)
         this.modal_flag = false
       }).catch(e => {
         this.errors.push(e)
