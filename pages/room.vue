@@ -22,7 +22,7 @@
       <div class="room-left">
         <div class="video-panel">
           <!-- <iframe id="youtube-player" width="100%" height="100%" :src="url" frameborder="0" allowfullscreen></iframe> -->
-          <youtube :video-id="videoId" :player-vars="playerVars"></youtube>
+          <youtube id="youtube-player" :video-id="videoId" @ready="ready" @playing="playing" @paused="pause" @buffering="buffering" @qued="qued" :player-vars="playerVars"></youtube>
         </div>
         <!-- <div class="control-panel">
             <button>버튼1</button>
@@ -90,9 +90,15 @@ export default {
       })
     })
 
-    axios.get(/*process.env.baseUrl+*/'http://52.79.159.96:3000/bang/'+this.$route.query.id, {
+    socket.on('sync time', (time) => {
+      console.log("Agagag",time)
+      this.player.seekTo(time)
+    })
+
+    axios.get(process.env.serverUrl+'/bang/'+this.$route.query.id, {
       }).then(response => {
         console.log(response)
+        this.room = response.data;
         this.roomTitle = response.data.roomName
       }).catch(e => {
         this.errors.push(e)
@@ -178,6 +184,38 @@ export default {
       this.$nextTick(() => {
         this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
       })
+    },
+    ready (player) {
+      console.log("agag")
+      this.player = player
+    },
+    playing (player) {
+      console.log("playing")
+      // The player is playing a video.
+    },
+    pause () {
+      console.log("pause")
+      if(this.nickname == this.room.bangjang){
+        socket.emit("sync time",parseInt(this.player.getCurrentTime()))
+        this.player.playVideo()
+      }else{
+        axios.get(process.env.serverUrl+'/bang/'+this.$route.query.id, {
+          }).then(response => {
+            console.log(response)
+            this.player.seekTo(response.data.t)
+            this.player.playVideo()
+          }).catch(e => {
+            this.errors.push(e)
+          })
+      }
+    },
+    buffering (){
+      console.log("buffering")
+      console.log(this.player)
+      console.log(this.room.bangjang)
+    },
+    qued () {
+      console.log("qued")
     }
   },
   data() {
@@ -191,6 +229,8 @@ export default {
       messages: [],
       message: '',
       videoId: '',
+      player:{},
+      room:{},
       playerVars: { autoplay: 1, time: 1},
       playerOptions: {
           // videojs options
@@ -463,5 +503,10 @@ export default {
   width: 100%;
   height: 35px;
   border-bottom: 1px solid #8f8f8f;
+}
+
+#youtube-player {
+  width:100%;
+  height:100%;
 }
 </style>
