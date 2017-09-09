@@ -26,7 +26,17 @@
 </template>
 
 <script>
+export default {
+  layout: 'chatroom',
+  head () {
+    return {
+      title: 'Wetube Chat'
+    }
+  },
+  methods: {
 
+  }
+}
 </script>
 
 <style scoped>
