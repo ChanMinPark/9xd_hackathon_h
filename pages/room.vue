@@ -54,7 +54,14 @@
       </div>
     </div>
     <div class="room-bottom">
+      <div class="bottom-title">
+        추천 동영상
+      </div>
+      <div class="bottom-video-list">
+        <div class="video-card">
 
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -65,6 +72,7 @@
 import axios from '~/plugins/axios'
 import socket from '~/plugins/socketio';
 var player;
+var videoThumbnails = [];
 
 export default {
   layout: 'chatroom',
@@ -110,10 +118,44 @@ export default {
         console.log(this.url)
         this.modal_flag = false
         socket.emit('join', this.$route.query.id, this.nickname)
+
+        this.relatedVideosUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${this.videoId}&type=video&maxResults=5&key=`
+        axios.get(this.relatedVideosUrl + this.apiKey).then(data => {
+          console.log(data)
+          this.extractVideoURLS(data.data);
+        })
       }).catch(e => {
         this.errors.push(e)
       })
     },
+    extractVideoURLS: function (data) {
+      console.log('>>> ', data);
+      for(let index in data.items) {
+        console.log(index)
+        if(data.items[index].id.kind === 'youtube#video') {
+          var tempObj = {
+            id : 'https://img.youtube.com/vi/' + (data.items[index].snippet.thumbnails.default.url).split('/')[4] + '/mqdefault.jpg',
+            title : data.items[index].snippet.title
+          }
+          this.videoIdList.push(tempObj);
+        }
+      }
+    },
+    // createThumbnailImageList(videoList) {
+    //   var tempURL = '';
+    //   for (let index = 0; index < videoList.length; index++) {
+    //     tempURL = 'https://img.youtube.com/vi/' + videoList[index].id + '/mqdefault.jpg';
+    //     videoThumbnails.push(tempURL);
+    //   }
+    //   console.log(videoThumbnails)
+    //   this.addImageElements(videoThumbnails);
+    // },
+    // addImageElements(thumbnailList) {
+    //   console.log("addImage")
+    //   for (let index = 0; index < thumbnailList.length; index++) {
+    //     this.parentDiv.push(thumbnailList[index])
+    //   }
+    // },
        onPlayerReady(event) {            
       console.log('onPlayerReady 실행');
 
@@ -156,7 +198,10 @@ export default {
             src: ''
           }],
         },
-      roomTitle: ''
+      roomTitle: '',
+      apiKey: 'AIzaSyBPZUrXXkG4Hl2kaD5kyCreNhVduDdiCDQ',
+      relatedVideosUrl: '',
+      videoIdList: []
     }
   },
   created: function() {
@@ -279,7 +324,7 @@ export default {
   width: 100%;
   height: 300px;
 
-  background-color: #9fb765;
+  /* background-color: #9fb765; */
 }
 
 .room-left {
@@ -411,5 +456,12 @@ export default {
   display: table-cell;
   vertical-align: middle;
   float: left;
+}
+
+.bottom-title {
+  text-align: left;
+  width: 100%;
+  height: 35px;
+  border-bottom: 1px solid #8f8f8f;
 }
 </style>
