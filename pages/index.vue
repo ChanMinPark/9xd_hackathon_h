@@ -2,30 +2,28 @@
   <section class="container">
     <img src="~assets/img/logo.png" alt="Nuxt.js Logo" class="logo" />
     <h1 class="title">
-      USERS
+      GAMGI
     </h1>
-    <ul class="users">
-      <li v-for="(user, index) in users" :key="index" class="user">
-        <nuxt-link :to="{ name: 'id', params: { id: index }}">
-          {{ user.name }}
-        </nuxt-link>
-      </li>
-    </ul>
+    <section class="find-room">
+    <input type="text" id="input-link"/>
+    <button id="route-room">go</button>
+  </section>
+  <section class="make-room">
+    <nuxt-link to="/build-room">개설</nuxt-link>
+  </section>
   </section>
 </template>
 
 <script>
-import axios from '~/plugins/axios'
 
 export default {
-  async asyncData () {
-    let { data } = await axios.get('/api/users')
-    return { users: data }
-  },
   head () {
     return {
       title: 'Users'
     }
+  },
+  methods: {
+
   }
 }
 </script>
