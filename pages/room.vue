@@ -310,6 +310,15 @@ export default {
 
 .video-panel {
   height: 90%;
+  background-color: #000000;
+}
+
+.video-panel div {
+  height: 100%;
+}
+
+.video-panel div iframe {
+  height: 100%;
 }
 
 .control-panel {
