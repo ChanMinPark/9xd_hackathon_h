@@ -27,6 +27,14 @@
 
 <script>
 export default {
+  layout: 'chatroom',
+  head () {
+    return {
+      title: 'Wetube Chat'
+    }
+  },
+  methods: {
+  },
   data () {
     return {
       url: 'https://www.youtube.com/embed/Dza-lHdf6GU'
