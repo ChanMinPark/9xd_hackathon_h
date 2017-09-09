@@ -1,0 +1,41 @@
+body {
+	padding: 0;
+	margin: 0;
+	overflow: hidden;
+}
+
+#thumbnail-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	white-space: nowrap;
+}
+
+#thumbnail-container:after {
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: #505050;
+	opacity: 0.4;
+}
+
+.thumbnail-image {
+	width: 20%;
+	min-width: 250px;
+	display: inline-block;
+	-webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-o-filter: blur(3px);
+	-ms-filter: blur(3px);
+	filter: blur(3px);
+	background-color: #ccc;
+}
+
+.thumbnail-image img {
+	width: 100%;
+	height: 100%;
+}

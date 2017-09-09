@@ -1,26 +1,22 @@
 <template>
-  <section class="container">
-    <h2>채팅방 개설</h2>
-    <section>
-      <div class="field">
-  <label class="label">Name</label>
-  <div class="control">
-    <input class="input" type="text" placeholder="e.g Alex Smith">
+<section class="container">
+  <h2>채팅방 개설</h2>
+  <div class="field">
+    <label class="label">닉네임</label>
+    <div class="control">
+      <input class="input" type="text" id="input-nick" placeholder="e.g 뿌잉뿌잉">
+    </div>
+    <label class="label">제목</label>
+    <div class="control">
+      <input class="input" type="text" id="input-title" placeholder="e.g. 꿀잼동영상 같이보실분">
+    </div>
+    <label class="label">링크</label>
+    <div class="control">
+      <input class="input" type="text" id="input-link" placeholder="e.g. https://www.youtube.com/embed/Dza-lHdf6GU">
+    </div>
   </div>
-</div>
-
-<div class="field">
-  <label class="label">Email</label>
-  <div class="control">
-    <input class="input" type="email" placeholder="e.g. alexsmith@gmail.com">
-  </div>
-</div>
-    <div>닉네임 : <input type="text" id="input-nick"/></div></br>
-    <div>제목 : <input type="text" id="input-title"/></div></br>
-    <div>링크 : <input type="text" id="input-link"/></div></br>
-    <nuxt-link to="/room">개설</nuxt-link>
-  </section>
-  </section>
+  <nuxt-link to="/room">개설</nuxt-link>
+</section>
 </template>
 
 <script>
@@ -39,18 +35,17 @@ export default {
 </script>
 
 <style scoped>
-.title
-{
+.title {
   margin: 30px 0;
 }
-.users
-{
+
+.users {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.user
-{
+
+.user {
   margin: 10px 0;
 }
 </style>
