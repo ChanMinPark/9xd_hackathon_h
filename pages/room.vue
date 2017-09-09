@@ -79,7 +79,7 @@ export default {
   layout: 'chatroom',
   head() {
     return {
-      title: 'Wetube Chat'
+      title: 'Gam-Gi'
     }
   },
   beforeMount() {

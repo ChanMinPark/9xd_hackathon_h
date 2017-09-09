@@ -23,7 +23,7 @@
 export default {
   head () {
     return {
-      title: 'Users'
+      title: 'Gam-Gi'
     }
   },
   methods: {
